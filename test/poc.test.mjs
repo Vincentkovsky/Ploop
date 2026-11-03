@@ -4,9 +4,12 @@ import { mkdtemp, readFile, writeFile, appendFile, rm, chmod } from "node:fs/pro
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { git, parseFeedback, readFeedbackBytes } from "../src/runtime.mjs";
+import { git, readFeedbackBytes } from "../src/runtime.mjs";
+import { feedbackInput, feedbackSource } from "../src/contracts.mjs";
 import { CodexRpc, parseMessage, runCodex } from "../src/codex-rpc.mjs";
-import { freezeCandidate, runPoc, seedRepository, tapSummary, verifyCommit } from "../src/poc.mjs";
+import { runPoc } from "../src/poc.mjs";
+import { seedRepository, bindDemo } from "../src/demo.mjs";
+import { freezeCandidate, tapSummary, verifyCommit } from "../src/execution.mjs";
 
 const fake = fileURLToPath(new URL("./fixtures/fake-codex.mjs", import.meta.url));
 await chmod(fake, 0o755);
@@ -18,9 +21,10 @@ const temporary = async (t) => {
 
 test("feedback rejects unsupported versions and malformed context before execution", async () => {
   const feedback = JSON.parse(await readFile(new URL("../examples/orders/feedback.json", import.meta.url)));
-  assert.equal(parseFeedback(feedback), feedback);
+  assert.equal(feedbackInput(feedback), feedback);
   for (const value of [null, [], { ...feedback, schemaVersion: 2 }, { ...feedback, title: "" }, { ...feedback, context: { observations: [3] } }])
-    assert.throws(() => parseFeedback(value), { code: "invalid_feedback" });
+    assert.throws(() => feedbackInput(value), (error) => ["invalid_request", "invalid_feedback"].includes(error.code));
+  assert.throws(() => feedbackSource(Buffer.from([0xff])), { code: "invalid_feedback" });
 });
 
 test("feedback input is rejected at the byte budget before parsing or execution", async (t) => {
@@ -58,6 +62,16 @@ test("protocol cancellation waits for an interrupted terminal turn", async (t) =
   } finally { clearTimeout(timer); }
 });
 
+test("Agent timeout covers initialization before a turn identity exists", async (t) => {
+  const cwd = await temporary(t); await writeFile(join(cwd, ".slow-initialize"), "");
+  await assert.rejects(() => runCodex({ executable: fake, cwd, task: "fixture", timeoutMs: 50 }), { code: "agent_timeout" });
+});
+
+test("Agent timeout interrupts an active prompt instead of returning success", async (t) => {
+  const cwd = await temporary(t);
+  await assert.rejects(() => runCodex({ executable: fake, cwd, task: "WAIT_FOR_CANCELLATION", timeoutMs: 150 }), { code: "agent_timeout" });
+});
+
 test("malformed RPC output rejects its pending caller and still closes the child", async (t) => {
   const rpc = new CodexRpc({ executable: fake, cwd: await temporary(t) });
   try {
@@ -70,7 +84,7 @@ test("malformed RPC output rejects its pending caller and still closes the child
 test("baseline runs all eight acceptance checks and reproduces the seeded bug", async (t) => {
   const root = await temporary(t), repository = join(root, "repository");
   const commit = await seedRepository(repository);
-  const result = await verifyCommit({ repository, commit, directory: join(root, "snapshot") });
+  const result = await verifyCommit({ repository, commit, directory: join(root, "snapshot"), acceptance: (await bindDemo(repository)).acceptance });
   assert.equal(result.code, 1);
   assert.deepEqual(result.summary, { tests: 8, pass: 3, fail: 5, cancelled: 0, skipped: 0 });
   assert.equal(result.commit, commit);
@@ -82,16 +96,16 @@ test("owner-controlled verification rejects source mutated during testing", asyn
   await seedRepository(repository);
   await appendFile(join(repository, "src/export-orders.mjs"), '\nimport { appendFileSync } from "node:fs"; appendFileSync(new URL(import.meta.url), "\\n// changed during verification\\n");\n');
   await git(repository, ["add", "--", "src/export-orders.mjs"]);
-  await git(repository, ["-c", "commit.gpgsign=false", "commit", "-m", "test: mutate source during verification"]);
+  await git(repository, ["-c", "user.name=Ploop", "-c", "user.email=poc@ploop.invalid", "-c", "commit.gpgsign=false", "commit", "-m", "test: mutate source during verification"]);
   const commit = await git(repository, ["rev-parse", "HEAD"]);
-  await assert.rejects(() => verifyCommit({ repository, commit, directory: join(root, "snapshot") }), { code: "verification_changed" });
+  await assert.rejects(async () => verifyCommit({ repository, commit, directory: join(root, "snapshot"), acceptance: (await bindDemo(repository)).acceptance }), { code: "verification_changed" });
 });
 
 test("candidate freezing rejects edits outside the authorized source file", async (t) => {
   const root = await temporary(t), repository = join(root, "repository");
   const baseCommit = await seedRepository(repository);
   await appendFile(join(repository, "README.md"), "\nAgent modified the acceptance instructions.\n");
-  await assert.rejects(() => freezeCandidate({ worktree: repository, baseCommit }), { code: "unauthorized_changes" });
+  await assert.rejects(() => freezeCandidate({ worktree: repository, baseCommit, allowedPaths: ["src/export-orders.mjs"] }), { code: "unauthorized_changes" });
 });
 
 test("an Agent saying success without a fix cannot produce a verified result", async (t) => {

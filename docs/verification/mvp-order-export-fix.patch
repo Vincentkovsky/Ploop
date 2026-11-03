@@ -1,0 +1,27 @@
+diff --git a/src/export-orders.mjs b/src/export-orders.mjs
+index a3f0128..5de2ec0 100644
+--- a/src/export-orders.mjs
++++ b/src/export-orders.mjs
+@@ -6,6 +6,20 @@ const csvField = (value) => {
+ // fetchPage({ cursor: string | null, limit: number }) returns
+ // { orders: Array<{ id: string, customer: string }>, nextCursor: string | null }.
+ export async function exportOrders(fetchPage) {
+-  const { orders } = await fetchPage({ cursor: null, limit: 100 });
+-  return ["id,customer", ...orders.map(({ id, customer }) => [id, customer].map(csvField).join(","))].join("\n");
++  const rows = ["id,customer"];
++  const seenCursors = new Set();
++  let cursor = null;
++
++  do {
++    if (seenCursors.has(cursor)) {
++      throw new Error("Repeated cursor while exporting orders");
++    }
++    seenCursors.add(cursor);
++
++    const { orders, nextCursor } = await fetchPage({ cursor, limit: 100 });
++    rows.push(...orders.map(({ id, customer }) => [id, customer].map(csvField).join(",")));
++    cursor = nextCursor;
++  } while (cursor !== null);
++
++  return rows.join("\n");
+ }

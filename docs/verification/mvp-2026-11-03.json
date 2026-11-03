@@ -1,0 +1,210 @@
+{
+  "schemaVersion": 1,
+  "observedOn": "2026-11-03",
+  "scenario": "Synthetic order-export bug; browser SDK submission and explicit admin approval",
+  "runtime": {
+    "node": "v22.11.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "codexExecutable": "codex",
+    "codexVersion": "0.166.0-alpha.5.1"
+  },
+  "sourceDigests": {
+    "src/bridge.mjs": "8dbc4aa7abc516fcbf048492de2a488d6ebfb79d1c4c23e6ab8ac19d60f7e663",
+    "src/hub.mjs": "5de8943203d40abe8a754b0a1a6c5a87d9d877f4278868b583f449e9849de999",
+    "src/execution.mjs": "f82a726349a5389e2b55c0110ff1479f05b9a1c4d53b83a17386a465e6b094ca",
+    "src/codex-rpc.mjs": "bf9ed235b0ebf31ef2b3673dc73c5028e57fa56c62c215e9668a74f490ef299c",
+    "src/hub-store.mjs": "6089dd38f480f07196cdbc27c4ab19d053dc4f1ee67f2aee2cf6611a53df20be"
+  },
+  "repair": {
+    "taskId": "38b26314-0f46-4151-ab2d-4fca5928831a",
+    "attemptId": "79faddf6-2041-4851-b53b-561471d91ec8",
+    "status": "verified",
+    "model": "gpt-6.1-sol",
+    "startedAt": "2026-11-03T03:30:16.406Z",
+    "finishedAt": "2026-11-03T03:31:30.107Z",
+    "baseCommit": "efc287c7864eda81aef4962206c3233ecea437ac",
+    "candidateCommit": "ad3f3570ea912083cf4c1a8c8bc1da8c4c30541e",
+    "projectDigest": "8565f5aaca8594bf5af174baa117ad26bf27b4772f8536b03ce7cb55a879dec9",
+    "baseline": {
+      "tests": 8,
+      "pass": 3,
+      "fail": 5,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "verification": {
+      "tests": 8,
+      "pass": 8,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "patchSha256": "72c628e71c3633dc574dbc3061243be617ec733b8d1e0ec91c481239004c039e",
+    "metrics": {
+      "elapsedMs": 73701,
+      "agentElapsedMs": 73287,
+      "tokenUsage": {
+        "total": {
+          "totalTokens": 117820,
+          "inputTokens": 113811,
+          "cachedInputTokens": 108032,
+          "cacheWriteInputTokens": 0,
+          "outputTokens": 4009,
+          "reasoningOutputTokens": 1493
+        },
+        "last": {
+          "totalTokens": 22035,
+          "inputTokens": 21674,
+          "cachedInputTokens": 21376,
+          "cacheWriteInputTokens": 0,
+          "outputTokens": 361,
+          "reasoningOutputTokens": 226
+        },
+        "modelContextWindow": 475000
+      },
+      "cpuMs": null,
+      "peakProcessFamilyMemoryBytes": null,
+      "actualCost": null
+    },
+    "localReport": {
+      "path": ".ploop/bridge/runs/79faddf6-2041-4851-b53b-561471d91ec8/report.json",
+      "sha256": "2ee8a78cb38635f42b852c5936529818fb9d65c4b153a02b9f94ac8a79b59b40"
+    },
+    "persistenceAfterRestart": "Verified task, original attempt, patch and limited receipt remained available after Hub and Bridge restart"
+  },
+  "hubRestartThenCancel": {
+    "taskId": "8ee147a9-f7ea-4dd0-8a60-069e28c23148",
+    "attemptId": "725a780b-1507-4c23-9ae2-9e6263af4455",
+    "hubState": "cancelled",
+    "localStatus": "cancelled",
+    "error": {
+      "code": "cancelled",
+      "message": "Agent execution stopped",
+      "details": {
+        "threadId": "01a19f84-af15-7731-802a-9d66c5144a5e",
+        "turnId": "01a19f84-af71-7291-ac85-3607f5483744",
+        "status": "interrupted",
+        "causeCode": "cancelled"
+      }
+    },
+    "metrics": {
+      "elapsedMs": 14088,
+      "agentElapsedMs": 13857,
+      "tokenUsage": null,
+      "cpuMs": null,
+      "peakProcessFamilyMemoryBytes": null,
+      "actualCost": null
+    },
+    "taskClaimedEvents": 1,
+    "taskFinishedEvents": 1,
+    "agentStartedEvents": 1,
+    "agentClosed": {
+      "code": 0,
+      "signal": null,
+      "turnStatus": "interrupted"
+    },
+    "startedAt": "2026-11-03T03:47:14.975Z",
+    "finishedAt": "2026-11-03T03:47:29.063Z",
+    "localReport": {
+      "path": ".ploop/bridge/runs/725a780b-1507-4c23-9ae2-9e6263af4455/report.json",
+      "sha256": "bec9a587e5abd7a8e4fb7a9dc6fe096605b6afbfe0a9ba8f5487503079d51eb9"
+    },
+    "scope": "Hub was gracefully restarted while the real Codex turn was active. The same Bridge and attempt continued; browser stop requested interruption. This does not establish abrupt power-loss recovery."
+  },
+  "nativeLifecycle": [
+    {
+      "case": "cancel",
+      "model": "gpt-6.1-sol",
+      "passed": true,
+      "startedAt": "2026-11-03T03:35:47.099Z",
+      "commandObservedAt": "2026-11-03T03:36:05.445Z",
+      "observedCommandCount": 1,
+      "remainingObservedCommandCount": 0,
+      "errorCode": "cancelled",
+      "closed": {
+        "code": 0,
+        "signal": null,
+        "turnStatus": "interrupted"
+      },
+      "elapsedMs": 18512,
+      "tokenUsage": {
+        "total": {
+          "totalTokens": 16985,
+          "inputTokens": 16884,
+          "cachedInputTokens": 13056,
+          "cacheWriteInputTokens": 0,
+          "outputTokens": 101,
+          "reasoningOutputTokens": 0
+        },
+        "last": {
+          "totalTokens": 16985,
+          "inputTokens": 16884,
+          "cachedInputTokens": 13056,
+          "cacheWriteInputTokens": 0,
+          "outputTokens": 101,
+          "reasoningOutputTokens": 0
+        },
+        "modelContextWindow": 475000
+      },
+      "scope": "One real native-provider turn and an observed synthetic wait command; bounded process observation is not full host isolation proof"
+    },
+    {
+      "case": "timeout",
+      "model": "gpt-6.1-sol",
+      "passed": true,
+      "startedAt": "2026-11-03T03:36:05.624Z",
+      "commandObservedAt": "2026-11-03T03:36:28.596Z",
+      "observedCommandCount": 1,
+      "remainingObservedCommandCount": 0,
+      "errorCode": "agent_timeout",
+      "closed": {
+        "code": 0,
+        "signal": null,
+        "turnStatus": "interrupted"
+      },
+      "elapsedMs": 30169,
+      "tokenUsage": {
+        "total": {
+          "totalTokens": 34294,
+          "inputTokens": 33938,
+          "cachedInputTokens": 29824,
+          "cacheWriteInputTokens": 0,
+          "outputTokens": 356,
+          "reasoningOutputTokens": 203
+        },
+        "last": {
+          "totalTokens": 17300,
+          "inputTokens": 17051,
+          "cachedInputTokens": 16768,
+          "cacheWriteInputTokens": 0,
+          "outputTokens": 249,
+          "reasoningOutputTokens": 203
+        },
+        "modelContextWindow": 475000
+      },
+      "scope": "One real native-provider turn and an observed synthetic wait command; bounded process observation is not full host isolation proof"
+    }
+  ],
+  "lifecycleSource": {
+    "path": ".ploop/verification/native-e7322caa-d685-41e7-addb-b3de201a46e6/report.json",
+    "sha256": "dc162308ea870fa1cf44e09b03b6f1b159bc79f21d532f5ad291aeed73d79af3"
+  },
+  "automaticChecks": {
+    "command": "npm test",
+    "tests": 28,
+    "passed": 28,
+    "failed": 0,
+    "providerScope": "Controlled processes/executors; no real model calls in unit/integration CI"
+  },
+  "limitations": [
+    "Trusted local repository and one machine only",
+    "One synthetic repair is not a general success-rate estimate",
+    "Real cancellation and timeout each observed one synthetic wait command; not full host isolation",
+    "No automatic GitHub publisher or deployment",
+    "Hard crash, disk-full and upgrade/restore matrix remains incomplete",
+    "CPU time, process-family peak memory and actual provider cost unmeasured",
+    "Cancelled full-stack task had no token usage notification before interruption; usage is unknown"
+  ],
+  "sourceDigestScope": "Export-time source snapshot; initial repair preceded final hardening. Real Hub restart/cancel check used the export-time execution sources."
+}

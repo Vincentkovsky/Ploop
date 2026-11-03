@@ -60,13 +60,16 @@ export function command(executable, args, { cwd, env = process.env, timeoutMs = 
   return new Promise((resolve, reject) => {
     const started = performance.now();
     let child, stdout = [], stderr = [], bytes = 0, failure = null;
-    let timer;
+    let timer, drainTimer;
     const stop = (error) => {
       if (failure) return;
       failure = error;
-      if (child && child.exitCode === null && child.signalCode === null) child.kill("SIGKILL");
+      if (child && child.exitCode === null && child.signalCode === null) {
+        try { process.platform === "win32" ? child.kill("SIGKILL") : process.kill(-child.pid, "SIGKILL"); }
+        catch (signalError) { if (signalError.code !== "ESRCH") failure = new PloopError("cleanup_failed", "Owned command group could not be stopped"); }
+      }
     };
-    try { child = spawn(executable, args, { cwd, env, stdio: ["ignore", "pipe", "pipe"] }); }
+    try { child = spawn(executable, args, { cwd, env, detached: process.platform !== "win32", stdio: ["ignore", "pipe", "pipe"] }); }
     catch (error) { reject(error); return; }
     const collect = (list, chunk) => {
       bytes += chunk.length;
@@ -76,12 +79,19 @@ export function command(executable, args, { cwd, env = process.env, timeoutMs = 
     child.stdout.on("data", (chunk) => collect(stdout, chunk));
     child.stderr.on("data", (chunk) => collect(stderr, chunk));
     child.on("error", (error) => { failure = error; });
-    const abort = () => stop(new PloopError("cancelled", "Command cancelled"));
+    child.on("exit", () => {
+      // A dead leader is no longer authority to signal its PID/group. Retain uncertain descendants.
+      drainTimer = setTimeout(() => {
+        failure = new PloopError("command_cleanup_unknown", "Command exited but inherited output pipes remained open; descendant cleanup is unconfirmed", { pid: child.pid, originalFailure: failure?.code ?? null });
+        child.stdout.destroy(); child.stderr.destroy();
+      }, 1500);
+    });
+    const abort = () => stop(signal?.reason instanceof PloopError ? signal.reason : new PloopError("cancelled", "Command cancelled"));
     signal?.addEventListener("abort", abort, { once: true });
     timer = setTimeout(() => stop(new PloopError("command_timeout", `Command exceeded ${timeoutMs}ms`)), timeoutMs);
     if (signal?.aborted) abort();
     child.on("close", (code, exitSignal) => {
-      clearTimeout(timer); signal?.removeEventListener("abort", abort);
+      clearTimeout(timer); clearTimeout(drainTimer); signal?.removeEventListener("abort", abort);
       if (failure) { reject(failure); return; }
       resolve({ executable, args, code, signal: exitSignal, stdout: Buffer.concat(stdout).toString("utf8"), stderr: Buffer.concat(stderr).toString("utf8"), elapsedMs: Math.round(performance.now() - started) });
     });
@@ -93,16 +103,4 @@ export async function git(cwd, args, options = {}) {
   const result = await command("git", ["-c", "core.hooksPath=/dev/null", ...args], { cwd, ...commandOptions });
   if (result.code !== 0) throw new PloopError("git_failed", `git ${args[0]} failed`, { code: result.code, stderr: result.stderr });
   return raw ? result.stdout : result.stdout.trim();
-}
-
-export function parseFeedback(value) {
-  if (!value || typeof value !== "object" || Array.isArray(value) || value.schemaVersion !== 1 || value.kind !== "bug")
-    throw new PloopError("invalid_feedback", "Expected a version 1 bug report");
-  for (const field of ["title", "description", "expected"]) {
-    if (typeof value[field] !== "string" || !value[field].trim()) throw new PloopError("invalid_feedback", `${field} must be a nonempty string`);
-  }
-  const context = value.context;
-  if (!context || typeof context !== "object" || Array.isArray(context) || typeof context.appVersion !== "string" || typeof context.pagePath !== "string" || !Array.isArray(context.observations) || context.observations.some((item) => typeof item !== "string"))
-    throw new PloopError("invalid_feedback", "Expected explicit appVersion, pagePath and observations");
-  return value;
 }

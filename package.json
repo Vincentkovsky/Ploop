@@ -1,14 +1,19 @@
 {
   "name": "ploop-poc",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "license": "MIT",
   "type": "module",
-  "engines": { "node": ">=22" },
+  "engines": { "node": ">=22.11.0" },
   "bin": { "ploop-poc": "src/cli.mjs" },
   "scripts": {
+    "start": "node --experimental-sqlite src/cli.mjs dev",
+    "hub": "node --experimental-sqlite src/cli.mjs hub",
+    "bridge": "node --experimental-sqlite src/cli.mjs bridge",
     "doctor": "node src/cli.mjs doctor",
     "poc": "node src/cli.mjs run",
-    "test": "node --test test/*.test.mjs"
+    "check": "node scripts/check.mjs",
+    "verify:real": "node scripts/verify-real.mjs",
+    "test": "node --experimental-sqlite --test test/*.test.mjs"
   }
 }
