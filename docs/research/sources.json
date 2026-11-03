@@ -1,0 +1,531 @@
+{
+  "schema_version": 1,
+  "research_date": "2026-11-03",
+  "timezone": "Asia/Shanghai",
+  "project_direction": "Installable open-source product for other developers; user confirmed in chat.",
+  "evidence_type": "Public documentation and read-only published-package source inspection; not REA Evidence.",
+  "artifact": {
+    "registry": "https://registry.npmjs.org/@gleapai/kai-bridge/0.15.1",
+    "tarball": "https://registry.npmjs.org/@gleapai/kai-bridge/-/kai-bridge-0.15.1.tgz",
+    "version": "0.15.1",
+    "sha256": "3e00be580d6cc43f2b9c892069d02fdf90136203137d36d802e060836c417ee2",
+    "integrity_verified": true,
+    "package_name": "@gleapai/kai-bridge",
+    "license_declaration": "MIT",
+    "independent_license_file_found": false,
+    "declared_repository": "git+https://github.com/GleapSDK/kai-bridge.git",
+    "public_repository_http_observation": 404,
+    "file_count": 72,
+    "unpacked_file_bytes": 1177250,
+    "runner_source": {
+      "repository": "GleapSDK/gleap_code_analyzer",
+      "commit": "06044aec833aa8fef2cd1c9aabead133b307b162",
+      "template": "e2b-coder-template",
+      "listed_file_count": 28,
+      "all_listed_file_hashes_match": true
+    },
+    "file_inventory": [
+      {
+        "path": "README.md",
+        "bytes": 8141,
+        "sha256": "8e378ea9793143b00c045ecf7370fe287b277a57941195428f9a43797016ef9f"
+      },
+      {
+        "path": "bin/kai-bridge.mjs",
+        "bytes": 17413,
+        "sha256": "ad132d2bd5d34876bce80ef08c74df8e996607745f7e7c459bd49df86ffeb4d5"
+      },
+      {
+        "path": "npm-shrinkwrap.json",
+        "bytes": 69885,
+        "sha256": "370a9e1d9428f1615bc8456920c5a5f90419bc45df6387581201d4ff93cf1336"
+      },
+      {
+        "path": "package.json",
+        "bytes": 1721,
+        "sha256": "4ab4600f323e9fbbdb7ff09a441a206639c108e7f065ea82cf5dc295910c89a2"
+      },
+      {
+        "path": "runner/SOURCE.json",
+        "bytes": 3064,
+        "sha256": "0fa521347ce6ffd210c977b131a14508949f1d5c8792c505995d54239099f076"
+      },
+      {
+        "path": "runner/acp-runner.mjs",
+        "bytes": 104791,
+        "sha256": "944f7131c0cacb57a5d9bfe95b8108abd7fe62ef7f9e0ef40180badd9cb617fb"
+      },
+      {
+        "path": "runner/lib/acp/harnesses.mjs",
+        "bytes": 34262,
+        "sha256": "974269dfcb59e6ec154001893e8fb069e23a07f93d5c68aa769ed618fe6e31d3"
+      },
+      {
+        "path": "runner/lib/acp/mapper.mjs",
+        "bytes": 55505,
+        "sha256": "8e9117239724a9ed65bebb5927a4727076c0b6f221e659a68b9c3b14e4c91adb"
+      },
+      {
+        "path": "runner/lib/acp/providerError.mjs",
+        "bytes": 3792,
+        "sha256": "16b5030a847baf59c5417ff80f4b576e3ea4b84269d68ead02172f591bc42e71"
+      },
+      {
+        "path": "runner/lib/acp/transcripts.mjs",
+        "bytes": 17742,
+        "sha256": "41abb1beefee453b686f550a2511fc2a51def855f6d4fdb41036c3444a7b7ce1"
+      },
+      {
+        "path": "runner/lib/contract.mjs",
+        "bytes": 61562,
+        "sha256": "96fd3ddbc1014e6f32ac83d759627da32526c9d82d3f7ed53f6a0e6358158cac"
+      },
+      {
+        "path": "runner/lib/mcp-auth-proxy.mjs",
+        "bytes": 8451,
+        "sha256": "5690d3746e408940ac8ac46238558bac61a99175e233d0f3284f1a3813493f97"
+      },
+      {
+        "path": "runner/lib/process-tree.mjs",
+        "bytes": 6047,
+        "sha256": "3dcf70519cb4f1373091caf3c129cbe89a0bbd4a3281c9fd4704b3c979297c8e"
+      },
+      {
+        "path": "runner/lib/redact.mjs",
+        "bytes": 7345,
+        "sha256": "3caed2f2e51b3b5dc5e96e2f10b602a31cfef202b678daf22a8817d95eed6b73"
+      },
+      {
+        "path": "runner/lib/serve.mjs",
+        "bytes": 5116,
+        "sha256": "c8785bc3c10e1abc2b9a33499490628b66dd8f9e109d2deb221019d4e6976529"
+      },
+      {
+        "path": "runner/lib/wire-proxy.mjs",
+        "bytes": 7777,
+        "sha256": "18b21a61e5885a80bad2e90024c21800496f726386e4533b8157cfc935260cb0"
+      },
+      {
+        "path": "runner/personas/claude/kai-asker.md",
+        "bytes": 6770,
+        "sha256": "a5f2d7b5147599edabb44724d355bbe148a9d5f4a33a68807fb3956a65fa4d28"
+      },
+      {
+        "path": "runner/personas/claude/kai-doc-explorer.md",
+        "bytes": 10109,
+        "sha256": "5e8a1bfed1f85048ab918ec87387f5dd061202a83fc48d9205d6876637d3f060"
+      },
+      {
+        "path": "runner/personas/claude/kai-documentarian.md",
+        "bytes": 19103,
+        "sha256": "f268817e4e8d50aad4f6a9b866b2d00152e723d4f583d663dbddd18ecf94c846"
+      },
+      {
+        "path": "runner/personas/claude/kai-researcher.md",
+        "bytes": 6631,
+        "sha256": "eb036ba13181c40a24936fc00d12f3beebd8c18e122ecd0d88bcf954e4498dc5"
+      },
+      {
+        "path": "runner/personas/claude/kai-resolution-analyst.md",
+        "bytes": 41286,
+        "sha256": "624c2e58b5ff22a0cd3db944adf27f8f08668757b018dc8c771f380c2f7dd7b7"
+      },
+      {
+        "path": "runner/personas/codex/kai-asker.md",
+        "bytes": 6717,
+        "sha256": "2a65cf056a2f5879483d008468baf37d9019b806786fa3e02a170a6078f52bf0"
+      },
+      {
+        "path": "runner/personas/codex/kai-doc-explorer.md",
+        "bytes": 10109,
+        "sha256": "5e8a1bfed1f85048ab918ec87387f5dd061202a83fc48d9205d6876637d3f060"
+      },
+      {
+        "path": "runner/personas/codex/kai-documentarian.md",
+        "bytes": 19155,
+        "sha256": "e2f50af1c00bc3de42be9f8ea1dc277237b5a124140f35a75ddb6c53b5840db7"
+      },
+      {
+        "path": "runner/personas/codex/kai-researcher.md",
+        "bytes": 6578,
+        "sha256": "64525eb798d99232e44bf44bd1845219e93a8a0bc34b3a79349c0c05653eb7d6"
+      },
+      {
+        "path": "runner/personas/codex/kai-resolution-analyst.md",
+        "bytes": 41286,
+        "sha256": "624c2e58b5ff22a0cd3db944adf27f8f08668757b018dc8c771f380c2f7dd7b7"
+      },
+      {
+        "path": "runner/tools/ask-user-mcp.mjs",
+        "bytes": 3795,
+        "sha256": "54788193f40f56949997cb244daded308b90eeecc111c54d60c85766b1947aab"
+      },
+      {
+        "path": "runner/tools/patch-claude-acp.mjs",
+        "bytes": 4767,
+        "sha256": "020d6f2e42a03047504ae45900ccac707de9f0b4184c3662448564affb291810"
+      },
+      {
+        "path": "runner/tools/premise-mcp.mjs",
+        "bytes": 4707,
+        "sha256": "f99f78ca1642501b9cac6e017d0c2ea99e95471111d9b9545571800a7d1a8adf"
+      },
+      {
+        "path": "runner/tools/preview-mcp.mjs",
+        "bytes": 8848,
+        "sha256": "f4ca0b4e1909e7a9b785866d1069c0b031f45cbfc2bd4943cb503fc33ca3b35a"
+      },
+      {
+        "path": "runner/tools/repo-request-mcp.mjs",
+        "bytes": 5394,
+        "sha256": "0be2b603286f4f361374993a9ec29299c84b9ed3b4672f695ef8e28eb6551498"
+      },
+      {
+        "path": "runner/tools/share-mcp.mjs",
+        "bytes": 8569,
+        "sha256": "3198ec5ac0de07824b430062815da457982c96003e272a4b52c6ac58de5cf304"
+      },
+      {
+        "path": "runner/tools/todo-mcp.mjs",
+        "bytes": 3526,
+        "sha256": "08e65508a9c5b6ceef1899fe7de5ab030436494455cdb90cc98061441863b078"
+      },
+      {
+        "path": "scripts/postinstall.mjs",
+        "bytes": 1719,
+        "sha256": "76704a91d14dbbfb80bdcf82ee9c4af0a17c946640d507790e751ecb0e82d00c"
+      },
+      {
+        "path": "scripts/runtime-smoke.mjs",
+        "bytes": 3694,
+        "sha256": "378c5c252166c2084c55c0d1a3ed8d80deeeb83c5d3e9b6cafd9adc061ed3d41"
+      },
+      {
+        "path": "src/acp-patch.mjs",
+        "bytes": 1982,
+        "sha256": "145189f18f5d09bcb4c351261c08263f55a4587ff5709f4cf766e98c72c0f5f4"
+      },
+      {
+        "path": "src/api.mjs",
+        "bytes": 8348,
+        "sha256": "01f4a78d70e4ad5234f4f70e422741f6a13cfa476db76db323e99a1333992c63"
+      },
+      {
+        "path": "src/companions.mjs",
+        "bytes": 5213,
+        "sha256": "513351c6a6d18144dde5b6842bddf892f4c0e6f699f477605053af027b31dd31"
+      },
+      {
+        "path": "src/config.mjs",
+        "bytes": 3157,
+        "sha256": "00caf20d2b1ebd2e45b83f31633130d24b06eb1226f16093d64e7a689622b7e6"
+      },
+      {
+        "path": "src/daemon.mjs",
+        "bytes": 147332,
+        "sha256": "2d0cb0dcc4449c371cc0bf9cc76ecdebdcd4301481e363b320e9759a7311ff75"
+      },
+      {
+        "path": "src/deps.mjs",
+        "bytes": 12524,
+        "sha256": "c4195235e2bf1ef5ebb5b081604871599bc5d380cf3b200b0e0f70e9a24b5474"
+      },
+      {
+        "path": "src/executor.mjs",
+        "bytes": 27910,
+        "sha256": "520effdda579994d59c986ddf52a792161faae3d5acba61355d652d761191042"
+      },
+      {
+        "path": "src/gateway.mjs",
+        "bytes": 10546,
+        "sha256": "738c0b2dbbb1e1803f7989ffb7f823d00fa88bf3ac2a47f6659c8652fd603e3a"
+      },
+      {
+        "path": "src/git-auth.mjs",
+        "bytes": 1933,
+        "sha256": "57f067255e995828a5e9379cf385125f74151093462533e12f0e988f11a2afc7"
+      },
+      {
+        "path": "src/harness-errors.mjs",
+        "bytes": 724,
+        "sha256": "916a70366c26db8971ef0498b3884b2854a66f2fb4e5c1dee4697e81560b0119"
+      },
+      {
+        "path": "src/harness-install.mjs",
+        "bytes": 6071,
+        "sha256": "e3d76c5c7ce10db207f67ceabcbe3d3b78c9d3a91357f0481b9007e1ea94e687"
+      },
+      {
+        "path": "src/harnesses.mjs",
+        "bytes": 21374,
+        "sha256": "deb4d43dc6648d40c7c34f483d45cf43208b428a3fc3b0aba2a7eef047e2f5e6"
+      },
+      {
+        "path": "src/help.mjs",
+        "bytes": 7776,
+        "sha256": "c6c1202a5c22cd3b5b43a4efb0bcc1d9590f42875a3e18c838e9440fba49629d"
+      },
+      {
+        "path": "src/host-env.mjs",
+        "bytes": 3924,
+        "sha256": "e3e3bc8db50a75d1aa85218c1d1355af9b791c83b3fdc6e25345df8a7339c49c"
+      },
+      {
+        "path": "src/live-sessions.mjs",
+        "bytes": 21808,
+        "sha256": "67597e8bb22af274369ea4d2570fa26f8fbfaf839f0bfc4f9f4426950934029b"
+      },
+      {
+        "path": "src/logs.mjs",
+        "bytes": 2090,
+        "sha256": "528be30faaf1545d6409ff7723d85ca702652e53840895b0819d7d9a7a20e494"
+      },
+      {
+        "path": "src/models.mjs",
+        "bytes": 9695,
+        "sha256": "992deb989cfcb309dcb4aedb89bf303e0567567d35fef08a45d48631645174b8"
+      },
+      {
+        "path": "src/playwright-patch.mjs",
+        "bytes": 3731,
+        "sha256": "75fa148c1510e4b560cda193104e94c83b936c17be7de495fb3d0518ee28a3c1"
+      },
+      {
+        "path": "src/ports.mjs",
+        "bytes": 7563,
+        "sha256": "6cd08711b9bd416c91f012b6ab7e87771cb2e182e563806d34db987b9f33f717"
+      },
+      {
+        "path": "src/preview-errors.mjs",
+        "bytes": 11727,
+        "sha256": "93ae9a29b9e14d2d016b380edb80ceb16a2f3b440727be400f513414e26bd240"
+      },
+      {
+        "path": "src/preview-ports.mjs",
+        "bytes": 1230,
+        "sha256": "8001f966d4e1950b0d349d49c7c2eafeeca20c7e33c245da6024bde21dee449b"
+      },
+      {
+        "path": "src/preview.mjs",
+        "bytes": 71383,
+        "sha256": "2679f0f1e9a9ac554d14860eb902874b106454edc11a901cb44a76824a9dd20c"
+      },
+      {
+        "path": "src/profiles.mjs",
+        "bytes": 11240,
+        "sha256": "85dd238381914545d3fc0754bc17c9a2d1ad39bb019f4f6ee6dbf2c6cd57e598"
+      },
+      {
+        "path": "src/ps.mjs",
+        "bytes": 6945,
+        "sha256": "f3e996513ce35740d8846ae9db92d6dc0c8bbfceb14e1297d8f731891d008323"
+      },
+      {
+        "path": "src/redact.mjs",
+        "bytes": 4957,
+        "sha256": "29b1bf2650fffd3ae96d45c3705e83cb8b04555f2e6309f65d3e4c9b14906fc5"
+      },
+      {
+        "path": "src/rehydration.mjs",
+        "bytes": 6644,
+        "sha256": "8b673eb6703f0d28e50c5589099f15bbdcee960b06952ec76f951089954438c3"
+      },
+      {
+        "path": "src/repos.mjs",
+        "bytes": 10035,
+        "sha256": "5a17adc8f40b252ae569ca2ea4327530d7fc5facf5d48b913ad18c455b7a2d33"
+      },
+      {
+        "path": "src/repository-setup.mjs",
+        "bytes": 4922,
+        "sha256": "c15a50b3356adb567bf0b11a1ee564f0fd0aabe93db585209e3c231aa99d4b88"
+      },
+      {
+        "path": "src/selfupdate.mjs",
+        "bytes": 6036,
+        "sha256": "422f88ecf5960e973e72108db973f09f148198fdf33303470a18d9cf68b01a5b"
+      },
+      {
+        "path": "src/service.mjs",
+        "bytes": 8319,
+        "sha256": "751999d9212afddb6f2ef0ce95d910279a929961497f23a4dd2aec15a84dc875"
+      },
+      {
+        "path": "src/setup.mjs",
+        "bytes": 27111,
+        "sha256": "c78d133ce074edaf0515759d11226e48df82bde3734925e4645f787614dd47e9"
+      },
+      {
+        "path": "src/tui.mjs",
+        "bytes": 3394,
+        "sha256": "53d9cca6dac1ed836618cdcb0124a4da78c3d44af8b687fc2ffd2d33eb757b60"
+      },
+      {
+        "path": "src/tunnel-binary.mjs",
+        "bytes": 5659,
+        "sha256": "7b3b2264c3c8de5acf25b837330b75f676302a99945fb19557f754247c268b65"
+      },
+      {
+        "path": "src/tunnel.mjs",
+        "bytes": 9239,
+        "sha256": "7b5b8ad0d0bb29fa08639cca2648fd47792c665b68bd7c14d9e6c6a7771c0588"
+      },
+      {
+        "path": "src/user-cli.mjs",
+        "bytes": 3852,
+        "sha256": "42690dc576518e03d7688cfb9e65c8fafb747db7a3c9c8492401ae1ea890553f"
+      },
+      {
+        "path": "src/workspace.mjs",
+        "bytes": 47206,
+        "sha256": "b82e484ae65a0c2793409c532493f73ccf08727a31563605b6eaad1a95f3fca2"
+      },
+      {
+        "path": "src/worktree-cleanup.mjs",
+        "bytes": 8273,
+        "sha256": "cd3127f416279bd0e95fc619992757e139bb4a97eb169c4d02f4562a42a555c6"
+      }
+    ],
+    "execution_performed": false,
+    "business_api_requests_performed": false,
+    "vendor_code_copied_into_project": false
+  },
+  "local_environment_observation": {
+    "node": "v22.11.0",
+    "npm": "10.9.0",
+    "path_prefix_used": "/usr/local/bin",
+    "codex": "0.166.0-alpha.5.1",
+    "codex_path": "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex",
+    "commands_run": [
+      "node --version",
+      "npm --version",
+      "codex --version",
+      "codex app-server --help"
+    ],
+    "agent_inference_performed": false,
+    "auth_files_read": false,
+    "config_changed": false
+  },
+  "naming_observation": {
+    "npm_ploop": {
+      "status": "exists",
+      "latest_observed": "3.1.2",
+      "description": "Promise LOOPing utility functions",
+      "repository": "https://github.com/pawelt/ploop.git"
+    },
+    "npm_scoped_cli_query": {
+      "name": "@ploop/cli",
+      "http_status": 404,
+      "scope_ownership_verified": false
+    }
+  },
+  "sources": [
+    {
+      "id": "codex_app_server",
+      "url": "https://learn.chatgpt.com/docs/app-server",
+      "accessed_date": "2026-11-03"
+    },
+    {
+      "id": "codex_sdk",
+      "url": "https://learn.chatgpt.com/docs/codex-sdk",
+      "accessed_date": "2026-11-03"
+    },
+    {
+      "id": "codex_oauth_product_integration",
+      "url": "https://developers.openai.com/siwc/token-sharing-open-source/codex-app-server",
+      "accessed_date": "2026-11-03"
+    },
+    {
+      "id": "claude_agent_sdk",
+      "url": "https://code.claude.com/docs/en/agent-sdk/overview",
+      "accessed_date": "2026-11-03"
+    },
+    {
+      "id": "claude_subscription_usage",
+      "url": "https://support.claude.com/en/articles/15036540-use-the-claude-agent-sdk-with-your-claude-plan",
+      "accessed_date": "2026-11-03"
+    },
+    {
+      "id": "acp_v1",
+      "url": "https://agentclientprotocol.com/protocol/v1/prompt-turn",
+      "accessed_date": "2026-11-03"
+    },
+    {
+      "id": "mcp_architecture",
+      "url": "https://modelcontextprotocol.io/docs/2026-07-28/learn/architecture",
+      "accessed_date": "2026-11-03"
+    },
+    {
+      "id": "gleap_web_sdk",
+      "url": "https://github.com/GleapSDK/JavaScript-SDK",
+      "accessed_date": "2026-11-03"
+    },
+    {
+      "id": "self_heal_sdk",
+      "url": "https://github.com/andrelandgraf/self-heal-sdk",
+      "accessed_date": "2026-11-03"
+    },
+    {
+      "id": "github_webhook_validation",
+      "url": "https://docs.github.com/en/webhooks/using-webhooks/validating-webhook-deliveries",
+      "accessed_date": "2026-11-03"
+    },
+    {
+      "id": "github_webhook_best_practices",
+      "url": "https://docs.github.com/en/webhooks/using-webhooks/best-practices-for-using-webhooks",
+      "accessed_date": "2026-11-03"
+    },
+    {
+      "id": "sqlite_wal",
+      "url": "https://sqlite.org/wal.html",
+      "accessed_date": "2026-11-03"
+    },
+    {
+      "id": "sqlite_transactions",
+      "url": "https://sqlite.org/lang_transaction.html",
+      "accessed_date": "2026-11-03"
+    },
+    {
+      "id": "node_sqlite",
+      "url": "https://nodejs.org/docs/latest-v24.x/api/sqlite.html",
+      "accessed_date": "2026-11-03"
+    },
+    {
+      "id": "rrweb_docs",
+      "url": "https://rrweb.com/docs/",
+      "accessed_date": "2026-11-03"
+    },
+    {
+      "id": "langfuse_trace",
+      "url": "https://langfuse.com/docs/observability/best-practices",
+      "accessed_date": "2026-11-03"
+    },
+    {
+      "id": "langfuse_evaluations",
+      "url": "https://langfuse.com/docs/evaluation/overview",
+      "accessed_date": "2026-11-03"
+    },
+    {
+      "id": "npm_existing_name",
+      "url": "https://registry.npmjs.org/ploop",
+      "accessed_date": "2026-11-03"
+    }
+  ],
+  "unverified": [
+    "Real Agent integration and authentication in Ploop",
+    "Supported OS matrix",
+    "Install and upgrade experience",
+    "Task lifecycle under network/process failures",
+    "Correctness of generated patches",
+    "Token, elapsed time, CPU, process-family peak memory, and actual cost",
+    "Permission to reuse all published vendor components",
+    "Availability and ownership of package scope and domain"
+  ],
+  "files_created": [
+    "README.md",
+    "docs/方案.md",
+    "docs/实施路线.md",
+    "docs/research/公开证据.md",
+    "docs/research/sources.json"
+  ]
+}
