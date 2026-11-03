@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "kind": "bug",
+  "title": "导出订单时只返回前 100 条",
+  "description": "订单列表里有 250 条记录，点击导出后 CSV 只有前 100 条。列表翻页能看到其余订单。",
+  "expected": "按照 API 的 nextCursor 读取全部页面，保持原始顺序和 CSV 字段、转义规则。nextCursor 为 null 才表示结束；空字符串也是有效游标。重复游标应报错，API 错误应原样传播。",
+  "context": {
+    "appVersion": "orders-demo-seeded-bug",
+    "pagePath": "/orders",
+    "observations": ["第一页返回 100 条记录及下一页游标", "这是可复现的合成反馈案例，不是真实客户工单"]
+  }
+}

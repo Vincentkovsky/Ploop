@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "executedDate": "2026-11-03",
+  "timezone": "Asia/Shanghai",
+  "runId": "04fadc9b-772b-4d64-9124-d8629b277596",
+  "evidenceKind": "real local Codex invocation on a synthetic seeded fixture",
+  "status": "verified",
+  "model": "gpt-6.1-sol",
+  "node": "v22.11.0",
+  "platform": "darwin",
+  "arch": "arm64",
+  "codexVersionObservedBeforeRun": "0.166.0-alpha.5.1",
+  "baseCommit": "b9facda5f4147042d997884b2369d99e544c5d8c",
+  "candidateCommit": "ee1cf217b8e5057abe4a28185759eb9a0167d000",
+  "baseline": {
+    "exitCode": 1,
+    "tests": 8,
+    "pass": 3,
+    "fail": 5,
+    "cancelled": 0,
+    "skipped": 0,
+    "snapshotSha256": "86fbf8019017b3df190140370356352db1eba9a49dc23ffb413eceacad0bab78"
+  },
+  "verification": {
+    "exitCode": 0,
+    "tests": 8,
+    "pass": 8,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "snapshotSha256": "37d4061e09c720a31e47c398af511d9593169a2aab4f1c9ae8a6b26cf2296e17"
+  },
+  "acceptanceSha256": "9b9d23b72c381fb50d5b8bc050f0c6f3ee749e797f09ea68978166fa92f3efdd",
+  "patchSha256": "90b981ca523e9a18b60d82b5730c891f84859452cad3461faa011dfa3c5e9d65",
+  "sourceReportSha256": "b7440e2af0bb1c235d70e50503f5329cc1ddf6b0b64aafcb10f438e886430876",
+  "metrics": {
+    "elapsedMs": 41292,
+    "agentElapsedMs": 40811,
+    "tokenUsage": {
+      "total": {
+        "totalTokens": 91958,
+        "inputTokens": 90608,
+        "cachedInputTokens": 85120,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 1350,
+        "reasoningOutputTokens": 710
+      },
+      "last": {
+        "totalTokens": 19180,
+        "inputTokens": 19090,
+        "cachedInputTokens": 18560,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 90,
+        "reasoningOutputTokens": 0
+      },
+      "modelContextWindow": 475000
+    },
+    "cpuMs": null,
+    "peakProcessFamilyMemoryBytes": null,
+    "actualCost": null
+  },
+  "transportProjection": {
+    "appServerCloseCode": 0,
+    "turnStatus": "completed",
+    "rawProtocolRetained": false
+  },
+  "limitations": [
+    "Synthetic feedback and intentionally seeded example bug",
+    "No Hub, SDK or durable distributed queue yet",
+    "No claim of credential/read isolation from workspace-write",
+    "No automatic publication; remote PR is a separate maintainer operation",
+    "CPU, process-family peak memory and actual cost are unmeasured",
+    "Run directories are retained; automatic recovery/resume is not implemented"
+  ],
+  "publicExport": "Necessary execution facts only; raw feedback, messages, full command outputs and local paths remain in the local run directory.",
+  "commitScope": "Commit IDs belong to the retained fixture repository, not the Ploop implementation repository."
+}

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ploop · 本地工作台</title><link rel="stylesheet" href="/app.css"><script type="module" src="/app.mjs"></script></head>
+<body data-auth="locked">
+  <div id="connect" class="connect-screen">
+    <form id="connect-form" class="connect-card">
+      <div class="wordmark">p<span class="loop-mark">loo</span>p<span class="logo-dot"></span></div>
+      <p class="eyebrow">YOUR LOCAL WORKSPACE</p><h1>把反馈<br>变成下一步。</h1>
+      <p class="muted">连接这台电脑上的 Ploop，查看反馈、批准任务，核对每一次修复的证据。</p>
+      <label for="admin-key">本机连接密钥</label><input id="admin-key" type="password" autocomplete="current-password" required placeholder="粘贴 Hub 的 adminToken">
+      <p class="field-help">密钥位于启动命令显示的 <code>secrets.json</code> 文件。它只用于本机工作台。</p>
+      <button class="button primary" type="submit">连接工作台 <span aria-hidden="true">→</span></button><p id="connect-error" class="error-text" role="alert"></p>
+    </form><p class="connect-caption">Feedback in. Evidence out.</p>
+  </div>
+  <div id="workspace" class="workspace">
+    <aside class="sidebar">
+      <a class="wordmark" href="/" aria-label="Ploop 首页">p<span class="loop-mark">loo</span>p<span class="logo-dot"></span></a>
+      <div class="workspace-label"><span class="status-dot"></span> 本地工作区</div>
+      <nav aria-label="主导航"><button data-view="inbox" class="nav-item active"><span>01</span> 反馈收件箱 <b id="nav-count">0</b></button><button data-view="projects" class="nav-item"><span>02</span> 项目</button><button data-view="bridges" class="nav-item"><span>03</span> Bridge</button></nav>
+      <div class="sidebar-note"><div class="mini-loop" aria-hidden="true">↳</div><p>从用户的一句话，<br>到可核对的改动。</p></div>
+      <div class="sidebar-bottom"><span class="mono">PLOOP / LOCAL MVP</span><button id="disconnect" class="text-button">断开连接</button></div>
+    </aside>
+    <main>
+      <header class="topbar"><div><span class="eyebrow">PLOOP WORKSPACE</span><span id="bridge-indicator" class="connection-status">正在连接</span></div><a class="button secondary" href="/demo" target="_blank" rel="noopener">体验反馈入口 <span aria-hidden="true">↗</span></a></header>
+      <div id="global-error" class="notice error-notice" hidden role="alert"></div>
+      <section id="inbox-view">
+        <div class="page-heading"><div><p class="eyebrow">CLOSE THE LOOP</p><h1>反馈，开始有了下文。</h1><p class="muted">先理解问题，再批准执行。修复结果由独立验收确认。</p></div><div class="edition">01<span>本地执行<br>证据随行</span></div></div>
+        <div class="stats"><div><span>待确认</span><strong id="stat-new">—</strong></div><div><span>执行中 / 排队中</span><strong id="stat-active">—</strong></div><div><span>已验证补丁</span><strong id="stat-verified">—</strong></div><div><span>需要关注</span><strong id="stat-attention">—</strong></div></div>
+        <div class="inbox-layout"><section class="inbox-panel"><div class="panel-heading"><h2>反馈收件箱</h2><span class="mono">LATEST FIRST</span></div><div id="task-list" class="task-list"></div><button id="load-more" class="text-button load-more" hidden>加载更早的反馈</button></section><section id="task-detail" class="detail-panel" aria-live="polite"><div class="empty-detail"><span class="empty-glyph">↳</span><h2>每次修复，从一条反馈开始。</h2><p>在左侧选择反馈，或打开订单示例提交第一条。</p><a class="text-link" href="/demo" target="_blank" rel="noopener">打开反馈示例 ↗</a></div></section></div>
+      </section>
+      <section id="projects-view" hidden><div class="page-heading"><div><p class="eyebrow">EXPLICIT BY DESIGN</p><h1>项目与执行边界。</h1><p class="muted">仓库、允许修改的文件和验收方式由你选择。</p></div><button id="add-project" class="button primary">绑定项目 +</button></div><div id="project-list" class="project-grid"></div></section>
+      <section id="bridges-view" hidden><div class="page-heading"><div><p class="eyebrow">THE WORK HAPPENS HERE</p><h1>你自己的执行端。</h1><p class="muted">Bridge 主动连接本地 Hub。每个执行端同一时间处理一个任务。</p></div></div><div id="bridge-list" class="project-grid"></div><div class="notice">单独运行 Hub 时，在另一个终端启动 <code>npm run bridge</code>。异常退出后，未确认结束的执行会保留并显示“需要核对”。</div></section>
+      <footer><span>小步推进，留下证据。</span><span class="mono">LOCAL-FIRST · HUMAN-APPROVED</span></footer>
+    </main>
+  </div>
+  <dialog id="project-dialog"><form id="project-form"><div class="dialog-heading"><h2>绑定本地项目</h2><button type="button" id="close-project" class="text-button" aria-label="关闭">✕</button></div><p class="muted">批准任务后，Ploop 会在新 worktree 中执行仓库代码。仅绑定你愿意在这台电脑上运行的项目。</p><label>项目名称<input name="name" required placeholder="My web app"></label><label>仓库根目录<input name="repository" required placeholder="/absolute/path/to/repository"></label><label>允许修改的文件，每行一个<textarea name="paths" required rows="3" placeholder="src/export-orders.mjs"></textarea></label><label>验收命令，使用 JSON 参数数组<textarea name="command" required rows="3" placeholder='["node", "--test", "--test-reporter=tap", "/absolute/path/to/acceptance.test.mjs"]'></textarea></label><p class="field-help">验收必须输出 Node TAP。<code>PLOOP_TARGET</code> 指向待验证的 commit 快照。</p><label>验收源文件，每行一个绝对路径<textarea name="sources" required rows="2" placeholder="/absolute/path/to/acceptance.test.mjs"></textarea></label><label>预期验收项数<input name="tests" type="number" min="1" value="8" required></label><label class="check-field"><input name="baselineFail" type="checkbox" checked>先确认基准验收失败，再交给 Agent</label><label>允许提交反馈的应用 Origin，可选<textarea name="origins" rows="2" placeholder="http://127.0.0.1:5173"></textarea></label><p id="project-error" class="error-text" role="alert"></p><button class="button primary" type="submit">绑定并保存</button></form></dialog>
+</body></html>
