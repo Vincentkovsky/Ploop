@@ -1,0 +1,14 @@
+{
+  "name": "ploop-poc",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "bin": { "ploop-poc": "src/cli.mjs" },
+  "scripts": {
+    "doctor": "node src/cli.mjs doctor",
+    "poc": "node src/cli.mjs run",
+    "test": "node --test test/*.test.mjs"
+  }
+}
